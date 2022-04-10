@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static void main(String [] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException {
 
         // Declaration of files and scanners
         File complaintsCatalog = new File("Car Complaints.txt");
@@ -69,23 +69,19 @@ public class App {
         System.out.println("5. Exit");
         System.out.print("Please enter your choice: ");
 
-        while(true)
-        {
+        while (true) {
             try {
                 // Read user input and check either to use the system or exit
                 Scanner input = new Scanner(System.in);
                 userInput = input.nextInt();
 
-                if (userInput == 2)
-                {
+                if (userInput == 2) {
                     // The following lines are 'temporary' to check singleton design pattern and it will be used efficiently in advance
                     Database db = Database.getInstance();
                     PrintWriter writer = db.getWriter();
                     System.out.println(db.toString());
                     writer.println("Hello World!");
-                }
-
-                else if (userInput == 4) // This choice will invoke the 'About Us' choice
+                } else if (userInput == 4) // This choice will invoke the 'About Us' choice
                 {
                     System.out.println(" " +
                             " \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information" +
@@ -93,20 +89,17 @@ public class App {
                             " Developing a Car Complaints system." +
                             " \n- [Our vision]: Aiming to reduce the number of" +
                             " accidents caused by malfunctioning cars from the factory.");
-                }
-                else if (userInput == 5) // Exit the program
+                } else if (userInput == 5) // Exit the program
                 {
                     System.out.print("\n*** Thank you for using our system, See you! ***");
                     System.exit(0);
-                }
-                else // any valid choice other than the defined ones
+                } else // any valid choice other than the defined ones
                 {
                     System.out.print("Please either enter one of the previous choices: ");
                     continue;
                 }
 
-            } catch (InputMismatchException exception)
-            {
+            } catch (InputMismatchException exception) {
                 System.err.print("Please enter a valid number: ");
                 continue;
             }
