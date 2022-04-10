@@ -85,7 +85,7 @@ public class App {
                     writer.println("Hello World!");
                 }
 
-                else if (userInput == 4)
+                else if (userInput == 4) // This choice will invoke the 'About Us' choice
                 {
                     System.out.println(" " +
                             " \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information" +
@@ -94,11 +94,12 @@ public class App {
                             " \n- [Our vision]: Aiming to reduce the number of" +
                             " accidents caused by malfunctioning cars from the factory.");
                 }
-                else if (userInput == 5)
+                else if (userInput == 5) // Exit the program
                 {
                     System.out.print("\n*** Thank you for using our system, See you! ***");
                     System.exit(0);
-                } else
+                }
+                else // any valid choice other than the defined ones
                 {
                     System.out.print("Please either enter one of the previous choices: ");
                     continue;
