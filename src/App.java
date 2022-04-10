@@ -27,7 +27,11 @@ public class App {
         System.out.println("            Car Complaints System");
         System.out.println("==========================================");
         System.out.println("brief description \n");
-        System.out.print("To start using our services please enter 1 otherwise enter 0 to exit: ");
+        System.out.println("[ Through enforcing vehicle performance standards \n" +
+                " and partnerships with state and local governments, \n" +
+                " NHTSA reduces deaths, injuries and economic losses from motor vehicle crashes. ]\n");
+
+        System.out.print("To start using our services please enter '1'. Otherwise enter '0' to exit: ");
 
         while (true) {
             try {
@@ -37,7 +41,7 @@ public class App {
                 if (userInput == 1) { // Use the system
                     break;
                 } else if (userInput == 0) { // Exit the system
-                    System.out.println("Thank you for using our system, See you!");
+                    System.out.println("\n*** Thank you for using our system, See you! ***");
                     System.exit(0);
                 } else { // any number other than 1 or 0
                     System.out.println("Please either enter 1 or 0: ");
@@ -54,6 +58,7 @@ public class App {
 
     public static void steps(Scanner in) {
         // Printing to user Services Menu
+        int userInput;
         System.out.println("\n==========================================");
         System.out.println("              Services Menu");
         System.out.println("==========================================");
@@ -63,14 +68,38 @@ public class App {
         System.out.println("4. About us");
         System.out.println("5. Exit");
         System.out.print("Please enter your choice: ");
-        int userInput = in.nextInt();
 
-        if (userInput == 2) {
-            // The following lines are 'temporary' to check singleton design pattern and it will be used efficiently in advance
-            Database db = Database.getInstance();
-            PrintWriter writer = db.getWriter();
-            System.out.println(db.toString());
-            writer.println("Hello World!");
+        while(true)
+        {
+            try {
+                // Read user input and check either to use the system or exit
+                Scanner input = new Scanner(System.in);
+                userInput = input.nextInt();
+
+                if (userInput == 2)
+                {
+                    // The following lines are 'temporary' to check singleton design pattern and it will be used efficiently in advance
+                    Database db = Database.getInstance();
+                    PrintWriter writer = db.getWriter();
+                    System.out.println(db.toString());
+                    writer.println("Hello World!");
+                }
+
+                else if (userInput == 5)
+                {
+                    System.out.print("\n*** Thank you for using our system, See you! ***");
+                    System.exit(0);
+                } else
+                {
+                    System.out.print("Please either enter one of the previous choices: ");
+                    continue;
+                }
+
+            } catch (InputMismatchException exception)
+            {
+                System.err.print("Please enter a valid number: ");
+                continue;
+            }
         }
     }
 }
