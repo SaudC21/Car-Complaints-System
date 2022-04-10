@@ -85,6 +85,15 @@ public class App {
                     writer.println("Hello World!");
                 }
 
+                else if (userInput == 4)
+                {
+                    System.out.println(" " +
+                            " \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information" +
+                            "Technology." +
+                            " Developing a Car Complaints system." +
+                            " \n- [Our vision]: Aiming to reduce the number of" +
+                            " accidents caused by malfunctioning cars from the factory.");
+                }
                 else if (userInput == 5)
                 {
                     System.out.print("\n*** Thank you for using our system, See you! ***");
