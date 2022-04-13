@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Timer;
 
 public class App {
 
@@ -44,11 +45,11 @@ public class App {
                     System.out.println("\n*** Thank you for using our system, See you! ***");
                     System.exit(0);
                 } else { // any number other than 1 or 0
-                    System.out.println("Please either enter 1 or 0: ");
+                    System.out.print("Please either enter 1 or 0: ");
                     continue;
                 }
             } catch (InputMismatchException e) { // Catch if user entered characters
-                System.err.println("ERROR: Please enter 1 or 0: ");
+                System.err.print("ERROR: Please enter 1 or 0: ");
                 continue;
             }
         }
@@ -58,19 +59,22 @@ public class App {
 
     public static void steps(Scanner in) {
         // Printing to user Services Menu
+
         int userInput;
-        System.out.println("\n==========================================");
-        System.out.println("              Services Menu");
-        System.out.println("==========================================");
-        System.out.println("1. Check current complaints");
-        System.out.println("2. Add new complaints");
-        System.out.println("3. Cars companies complaints");
-        System.out.println("4. About us");
-        System.out.println("5. Exit");
-        System.out.print("Please enter your choice: ");
+
 
         while (true) {
             try {
+                System.out.println("\n==========================================");
+                System.out.println("              Services Menu");
+                System.out.println("==========================================");
+                System.out.println("1. Check current complaints");
+                System.out.println("2. Add new complaints");
+                System.out.println("3. Cars companies complaints");
+                System.out.println("4. About us");
+                System.out.println("5. Exit");
+                System.out.print("Please enter your choice: ");
+
                 // Read user input and check either to use the system or exit
                 Scanner input = new Scanner(System.in);
                 userInput = input.nextInt();
@@ -89,18 +93,20 @@ public class App {
                             " Developing a Car Complaints system." +
                             " \n- [Our vision]: Aiming to reduce the number of" +
                             " accidents caused by malfunctioning cars from the factory.");
+
+
                 } else if (userInput == 5) // Exit the program
                 {
                     System.out.print("\n*** Thank you for using our system, See you! ***");
                     System.exit(0);
-                } else // any valid choice other than the defined ones
+                } else if (userInput < 0 || userInput > 5)// any valid choice other than the defined ones
                 {
-                    System.out.print("Please either enter one of the previous choices: ");
+                    System.out.println("\nPlease check the menu again, then enter your choice");
                     continue;
                 }
 
             } catch (InputMismatchException exception) {
-                System.err.print("Please enter a valid number: ");
+                System.err.println("** Please enter a valid number **\n ");
                 continue;
             }
         }
