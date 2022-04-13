@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Timer;
 
 public class App {
 
