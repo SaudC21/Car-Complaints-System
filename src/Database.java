@@ -1,11 +1,10 @@
-import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Database {
 
     private static Database db;
-    private PrintWriter writer;
     private final String fileName = "database.txt"; // Initializing file name
+    private PrintWriter writer;
 
     private Database() {
 //        try {

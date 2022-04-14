@@ -1,4 +1,3 @@
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Operation {
 
-    static ArrayList <Car> cars = new ArrayList<>();
+    static ArrayList<Car> cars = new ArrayList<>();
     static Database db = Database.getInstance();
 
     public static int introMessage() {
@@ -73,11 +72,18 @@ public class Operation {
                 userInput = input.nextInt();
 
                 if (userInput == 1) {
-                    //
+                    int iterator = 1;
+                    for (Car c : cars) {
+                        System.out.println(iterator++ + ". " + c.getBrand()); // TODO: fixing printing only unique values of brands.
+                    }
+                    System.out.print("Enter a brand name to search for: ");
+                    String brandName = input.next(); // TODO: error handling.
+                    getComplaintsByBrands(brandName);
 
-                    System.out.println(getComplaintsByBrands());
                 } else if (userInput == 2) {
-
+                    for (Car c : cars) {
+                        System.out.println(c);
+                    }
                 } else if (userInput == 3) {
 
                 } else if (userInput == 4) // This choice will invoke the 'About Us' choice
@@ -107,9 +113,11 @@ public class Operation {
         }
     }
 
-    public static String getComplaintsByBrands() {
-
-        return "";
+    public static void getComplaintsByBrands(String brand) {
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars.get(i).getBrand().equalsIgnoreCase(brand))
+                System.out.println(cars.get(i));
+        }
     }
 
     public static String getAllComplaints() {
@@ -135,11 +143,8 @@ public class Operation {
             String issue = st.nextToken();
             String solution = st.nextToken();
             cars.add(new Car(brand, model, year, vehicleNumber, issue, solution));
-            if(in.hasNext())
+            if (in.hasNext())
                 st = new StringTokenizer(in.nextLine(), ",");
         }
-
-
-
     }
 }
