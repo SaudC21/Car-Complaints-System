@@ -1,9 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Operation {
 
@@ -72,19 +69,14 @@ public class Operation {
                 userInput = input.nextInt();
 
                 if (userInput == 1) {
-                    int iterator = 1;
                     System.out.println();
-                    for (Car c : cars) {
-                        System.out.println(iterator++ + ". " + c.getBrand()); // TODO: fixing printing only unique values of brands.
-                    }
+                    printUniqueBrands();
                     System.out.println();
                     System.out.print("\nEnter a brand name to search for: ");
                     String brandName = input.next();// TODO: error handling.
                     getComplaintsByBrands(brandName);
                 } else if (userInput == 2) {
-                    for (Car c : cars) {
-                        System.out.println(c);
-                    }
+                    getAllComplaints();
                 } else if (userInput == 3) // This choice will invoke the 'About Us' choice
                 {
                     System.out.println(" " +
@@ -131,9 +123,10 @@ public class Operation {
         }
     }
 
-    public static String getAllComplaints() {
-
-        return "";
+    public static void getAllComplaints() {
+        for (Car c : cars) {
+            System.out.println(c);
+        }
     }
 
     public static void retrieveCars() throws FileNotFoundException {
@@ -151,6 +144,32 @@ public class Operation {
             cars.add(new Car(brand, model, year, vehicleNumber, issue));
             if (in.hasNext())
                 st = new StringTokenizer(in.nextLine(), ",");
+        }
+    }
+
+    public static void printUniqueBrands() {
+
+        int carsLen = cars.size();
+        String duplicated [] = new String[carsLen];
+        String unique [] = new String[carsLen];
+        int index = 0;
+
+        for (int i = 0; i < carsLen; i++) {
+            duplicated[i] = cars.get(i).getBrand();
+        }
+
+        Arrays.sort(duplicated);
+
+        for (int i = 0; i < duplicated.length; i++) {
+            while(i < carsLen - 1 && duplicated[i] == duplicated[i+1]) {
+                i++;
+            }
+            unique[index] = duplicated[i];
+            index++;
+        }
+
+        for (int i = 0; i < index; i++) {
+            System.out.println(unique[i] + " ");
         }
     }
 }
