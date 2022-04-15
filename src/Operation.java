@@ -49,7 +49,6 @@ public class Operation {
     }
 
     public static void steps() {
-        boolean flag = true;
         int userInput;
 
         while (true) {
@@ -59,7 +58,7 @@ public class Operation {
                 System.out.println("              Services Menu");
                 System.out.println("==========================================");
                 System.out.println("1. Cars companies complaints by brand");
-                System.out.println("2. Check all complaints");
+                System.out.println("2. Check all complaints"); // TODO: implementing the 'Observer' design pattern to enable sending the email.
                 System.out.println("3. About us");
                 System.out.println("4. Exit");
                 System.out.print("Please enter your choice: ");
@@ -148,10 +147,10 @@ public class Operation {
     }
 
     public static void printUniqueBrands() {
-
+        int iterator = 1;
         int carsLen = cars.size();
-        String duplicated [] = new String[carsLen];
-        String unique [] = new String[carsLen];
+        String duplicated[] = new String[carsLen];
+        String unique[] = new String[carsLen];
         int index = 0;
 
         for (int i = 0; i < carsLen; i++) {
@@ -161,7 +160,7 @@ public class Operation {
         Arrays.sort(duplicated);
 
         for (int i = 0; i < duplicated.length; i++) {
-            while(i < carsLen - 1 && duplicated[i] == duplicated[i+1]) {
+            while (i < carsLen - 1 && duplicated[i] == duplicated[i + 1]) {
                 i++;
             }
             unique[index] = duplicated[i];
@@ -169,7 +168,7 @@ public class Operation {
         }
 
         for (int i = 0; i < index; i++) {
-            System.out.println(unique[i] + " ");
+            System.out.println(iterator++ + ". " + unique[i] + " ");
         }
     }
 }

@@ -12,6 +12,7 @@ public class Car {
         this.year = year;
         this.vehicleNumber = vehicleNumber;
         this.issue = issue;
+
     }
 
     public String getBrand() {
@@ -55,17 +56,16 @@ public class Car {
     }
 
 
-
     @Override
     public String toString() {
         String lineSeparator = "+--------------+---------+-------+-------------+--------------------------------------------------------------------";
         System.out.println(lineSeparator);
 
-        String s = "* " + brand + " *" +
-                ", Model: " + model +
-                ", Year: " + year +
-                ", VehicleNumber: " + vehicleNumber +
-                ", issue: " + issue;
+        String s = brand +
+                " | Model: " + model +
+                " | Year: " + year +
+                " | VehicleNumber: " + vehicleNumber +
+                " | issue: " + issue;
         return s;
     }
 }
