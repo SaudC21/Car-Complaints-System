@@ -66,13 +66,15 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", year=" + year +
-                ", vehicleNumber=" + vehicleNumber +
-                ", issue='" + issue + '\'' +
-                ", solution='" + solution + '\'' +
-                '}';
+        String lineSeparator = "+--------------+---------+-------+-------------+--------------------------------------------------------------------";
+        System.out.println(lineSeparator);
+
+        String s = "* " + brand + " *" +
+                ", Model: " + model +
+                ", Year: " + year +
+                ", VehicleNumber: " + vehicleNumber +
+                ", issue: " + issue +
+                ", solution='" + solution;
+        return s;
     }
 }

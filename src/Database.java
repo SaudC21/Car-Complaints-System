@@ -31,8 +31,6 @@ public class Database {
 
     @Override
     public String toString() {
-        return "Database { " +
-                " File name: " + fileName + '\'' +
-                '}';
+        return "Database file name: " + fileName + " ..";
     }
 }

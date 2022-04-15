@@ -1,10 +1,13 @@
-Honda,Accord,2021,156454,fdasfdsa,fdsafdas 
-Honda,Civic,2015,156454,fdasfdsa,fdsafdas 
-Honda,Odyssey,2018,156454,fdasfdsa,fdsafdas 
-Ford,Figo,2021,156454,fdasfdsa,fdsafdas 
-Ferrari,Spider,2017,156454,fdasfdsa,fdsafdas 
-Ferrari,Roma,2018,156454,fdasfdsa,fdsafdas 
-Nissan,Sunny,2015,156454,fdasfdsa,fdsafdas 
-Nissan,Maxima,2020,156454,fdasfdsa,fdsafdas 
-Nissan,Maxima,2017,156454,fdasfdsa,fdsafdas
-Nissan,Sentra,2014,156454,fdasfdsa,fdsafdas 
+Honda,Accord,2021,156454,Faulty seatbelt not functioning due to internal break,fdsafdas
+Honda,Civic,2015,887524,Airbags might not appear in some cases,fdsafdas
+Honda,Odyssey,2018,996354,Tires air checker do not detect less air in the tires,fdsafdas
+Ford,Figo,2021,110724,Frontal air bags will not open,fdsafdas
+Ferrari,Spider,2017,114725,seats might get out of place suddenly,fdsafdas
+Ferrari,Roma,2018,302154,fuel department might experience a sudden expose to air,fdsafdas
+Nissan,Sunny,2015,333657,frontal light are subject to have extreme dimming light,fdsafdas
+Nissan,Maxima,2020,858210,frontal light are subject to have extreme dimming light,fdsafdas
+Nissan,Maxima,2017,995014,frontal light are subject to have extreme dimming light,fdsafdas
+Nissan,Sentra,2014,700485,rear doors produce noise when open fast,fdsafdas
+VOLKSWAGEN,Volve,2021,700698,frontal glass could produce noise due to leak of air,fdsafdas
+Toyota,Camry,2019,133457,Car might produce noises while exceeding 100km/h speed,fdsafdas
+Toyota,Corolla,2021,551479,Car might produce noises as soon as you run it,fdsafdas

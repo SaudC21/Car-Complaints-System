@@ -52,6 +52,7 @@ public class Operation {
     }
 
     public static void steps() {
+        boolean flag = true;
         int userInput;
 
         while (true) {
@@ -73,19 +74,20 @@ public class Operation {
 
                 if (userInput == 1) {
                     int iterator = 1;
+                    System.out.println();
                     for (Car c : cars) {
                         System.out.println(iterator++ + ". " + c.getBrand()); // TODO: fixing printing only unique values of brands.
                     }
-                    System.out.print("Enter a brand name to search for: ");
-                    String brandName = input.next(); // TODO: error handling.
+                    System.out.println();
+                    System.out.print("\nEnter a brand name to search for: ");
+                    String brandName = input.next();// TODO: error handling.
                     getComplaintsByBrands(brandName);
-
                 } else if (userInput == 2) {
                     for (Car c : cars) {
                         System.out.println(c);
                     }
                 } else if (userInput == 3) {
-
+                    // TODO: Adding to the database.
                 } else if (userInput == 4) // This choice will invoke the 'About Us' choice
                 {
                     System.out.println(" " +
@@ -98,7 +100,7 @@ public class Operation {
 
                 } else if (userInput == 5) // Exit the program
                 {
-                    System.out.print("\n*** Thank you for using our system, See you! ***");
+                    System.out.println("\n*** Thank you for using our system, See you! ***");
                     System.exit(0);
                 } else if (userInput < 0 || userInput > 5)// any valid choice other than the defined ones
                 {
@@ -114,9 +116,22 @@ public class Operation {
     }
 
     public static void getComplaintsByBrands(String brand) {
+
+        Scanner in = new Scanner(System.in);
+        System.out.println();
         for (int i = 0; i < cars.size(); i++) {
-            if (cars.get(i).getBrand().equalsIgnoreCase(brand))
+            if (cars.get(i).getBrand().equalsIgnoreCase(brand)) {
                 System.out.println(cars.get(i));
+            }
+        }
+        System.out.print("\n Search for another brand? Y/N: ");
+        String choice = in.next();
+        if (choice.contains("n")) {
+            steps();
+        } else {
+            System.out.print("Enter another brand to search for: ");
+            String choiceOfBrand = in.next();
+            getComplaintsByBrands(choiceOfBrand);
         }
     }
 
