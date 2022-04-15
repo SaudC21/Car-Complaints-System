@@ -63,9 +63,8 @@ public class Operation {
                 System.out.println("==========================================");
                 System.out.println("1. Cars companies complaints by brand");
                 System.out.println("2. Check all complaints");
-                System.out.println("3. Add new complaints");
-                System.out.println("4. About us");
-                System.out.println("5. Exit");
+                System.out.println("3. About us");
+                System.out.println("4. Exit");
                 System.out.print("Please enter your choice: ");
 
                 // Read user input and check either to use the system or exit
@@ -86,9 +85,7 @@ public class Operation {
                     for (Car c : cars) {
                         System.out.println(c);
                     }
-                } else if (userInput == 3) {
-                    // TODO: Adding to the database.
-                } else if (userInput == 4) // This choice will invoke the 'About Us' choice
+                } else if (userInput == 3) // This choice will invoke the 'About Us' choice
                 {
                     System.out.println(" " +
                             " \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information" +
@@ -98,11 +95,11 @@ public class Operation {
                             " accidents caused by malfunctioning cars from the factory.");
 
 
-                } else if (userInput == 5) // Exit the program
+                } else if (userInput == 4) // Exit the program
                 {
                     System.out.println("\n*** Thank you for using our system, See you! ***");
                     System.exit(0);
-                } else if (userInput < 0 || userInput > 5)// any valid choice other than the defined ones
+                } else if (userInput < 0 || userInput > 4)// any valid choice other than the defined ones
                 {
                     System.out.println("\nPlease check the menu again, then enter your choice");
                     continue;
@@ -116,7 +113,6 @@ public class Operation {
     }
 
     public static void getComplaintsByBrands(String brand) {
-
         Scanner in = new Scanner(System.in);
         System.out.println();
         for (int i = 0; i < cars.size(); i++) {
@@ -138,10 +134,6 @@ public class Operation {
     public static String getAllComplaints() {
 
         return "";
-    }
-
-    public static void addNewComplaints() {
-
     }
 
     public static void retrieveCars() throws FileNotFoundException {

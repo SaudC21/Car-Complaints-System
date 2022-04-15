@@ -5,7 +5,6 @@ public class Car {
     private int year;
     private int vehicleNumber;
     private String issue;
-    private String solution;
 
     public Car(String brand, String model, int year, int vehicleNumber, String issue, String solution) {
         this.brand = brand;
@@ -13,7 +12,6 @@ public class Car {
         this.year = year;
         this.vehicleNumber = vehicleNumber;
         this.issue = issue;
-        this.solution = solution;
     }
 
     public String getBrand() {
@@ -56,13 +54,7 @@ public class Car {
         this.issue = issue;
     }
 
-    public String getSolution() {
-        return solution;
-    }
 
-    public void setSolution(String solution) {
-        this.solution = solution;
-    }
 
     @Override
     public String toString() {
@@ -73,8 +65,7 @@ public class Car {
                 ", Model: " + model +
                 ", Year: " + year +
                 ", VehicleNumber: " + vehicleNumber +
-                ", issue: " + issue +
-                ", solution='" + solution;
+                ", issue: " + issue;
         return s;
     }
 }
