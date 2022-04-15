@@ -148,8 +148,7 @@ public class Operation {
             int year = Integer.parseInt(st.nextToken());
             int vehicleNumber = Integer.parseInt(st.nextToken());
             String issue = st.nextToken();
-            String solution = st.nextToken();
-            cars.add(new Car(brand, model, year, vehicleNumber, issue, solution));
+            cars.add(new Car(brand, model, year, vehicleNumber, issue));
             if (in.hasNext())
                 st = new StringTokenizer(in.nextLine(), ",");
         }
