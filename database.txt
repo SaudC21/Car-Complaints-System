@@ -11,3 +11,10 @@ Nissan,Sentra,2014,700485,rear doors produce noise when open fast
 VOLKSWAGEN,Volve,2021,700698,frontal glass could produce noise due to leak of air
 Toyota,Camry,2019,133457,Car might produce noises while exceeding 100km/h speed
 Toyota,Corolla,2021,551479,Car might produce noises as soon as you run it
+Toyota,Corolla,2015,551229,Fuel sensor might malfunction
+Toyota,Yaris,2021,551479,Breaks have some issues
+Toyota,Yaris,2021,551000,Breaks have reduced effect
+GMC,Yukun,2019,661079,Tires' sensors malfunction
+Lexus,C200,2017,177297,in some cases windows might not open
+
+
