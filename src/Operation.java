@@ -106,6 +106,7 @@ public class Operation {
     public static void getComplaintsByBrands(String brand) {
         Scanner in = new Scanner(System.in);
         System.out.println();
+        simulateNetworkLatency();
         for (int i = 0; i < cars.size(); i++) {
             if (cars.get(i).getBrand().equalsIgnoreCase(brand)) {
                 System.out.println(cars.get(i));
@@ -116,7 +117,8 @@ public class Operation {
         if (choice.contains("n")) {
             steps();
         } else {
-            System.out.print("Enter another brand to search for: ");
+            printUniqueBrands();
+            System.out.print("\nEnter another brand to search for: ");
             String choiceOfBrand = in.next();
             getComplaintsByBrands(choiceOfBrand);
         }
@@ -169,6 +171,23 @@ public class Operation {
 
         for (int i = 0; i < index; i++) {
             System.out.println(iterator++ + ". " + unique[i] + " ");
+        }
+    }
+
+
+    public static void simulateNetworkLatency() {
+        try {
+            System.out.println();
+            for (int i = 0; i <= 10; i++) {
+                System.out.print(".");
+                Thread.sleep(250);
+                if (i == 5){
+                    System.out.print(" Fetching ");
+                }
+            }
+            System.out.println("\n");
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
 }
