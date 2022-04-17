@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Operation {
+    static Scanner input = new Scanner(System.in);
 
     static ArrayList<Car> cars = new ArrayList<>();
     static Database db = Database.getInstance();
@@ -64,7 +65,6 @@ public class Operation {
                 System.out.print("Please enter your choice: ");
 
                 // Read user input and check either to use the system or exit
-                Scanner input = new Scanner(System.in);
                 userInput = input.nextInt();
 
                 if (userInput == 1) {
@@ -78,12 +78,11 @@ public class Operation {
                     getAllComplaints();
                 } else if (userInput == 3) // This choice will invoke the 'About Us' choice
                 {
-                    System.out.println(" " +
-                            " \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information" +
-                            "Technology." +
-                            " Developing a Car Complaints system." +
-                            " \n- [Our vision]: Aiming to reduce the number of" +
-                            " accidents caused by malfunctioning cars from the factory.");
+                    System.out.println(
+                             """ 
+                             \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information Technology. Developing a Car Complaints system.
+                             - [Our vision]: Aiming to reduce the number of accidents caused by malfunctioning cars from the factory.
+                                """);
 
 
                 } else if (userInput == 4) // Exit the program
@@ -104,23 +103,40 @@ public class Operation {
     }
 
     public static void getComplaintsByBrands(String brand) {
-        Scanner in = new Scanner(System.in);
+        String choice;
         System.out.println();
+        boolean flag = false;
         simulateNetworkLatency();
-        for (int i = 0; i < cars.size(); i++) {
-            if (cars.get(i).getBrand().equalsIgnoreCase(brand)) {
+        for (int i = 0; i < cars.size(); i++)
+        {
+            if (cars.get(i).getBrand().equalsIgnoreCase(brand))
+            {
                 System.out.println(cars.get(i));
             }
         }
         System.out.print("\n Search for another brand? Y/N: ");
-        String choice = in.next();
-        if (choice.contains("n")) {
-            steps();
-        } else {
-            printUniqueBrands();
-            System.out.print("\nEnter another brand to search for: ");
-            String choiceOfBrand = in.next();
-            getComplaintsByBrands(choiceOfBrand);
+        choice = input.next();
+        while(!flag)
+        {
+        try {
+            if (choice.equalsIgnoreCase("N") || choice.equalsIgnoreCase("NO")) {
+                steps();
+                flag = true;
+            } else if (choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("YES")) {
+                printUniqueBrands();
+                System.out.print("\nEnter another brand to search for: ");
+                String choiceOfBrand = input.next();
+                getComplaintsByBrands(choiceOfBrand);
+            } else {
+                throw new InputMismatchException();
+            }
+        }
+        catch (InputMismatchException exception){
+            System.err.print("You have entered an invalid input\n");
+            System.out.println();
+            System.out.print("Please enter Y or N: ");
+            choice = input.next();
+        }
         }
     }
 
