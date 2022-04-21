@@ -132,7 +132,7 @@ public class Operation {
             }
         }
         catch (InputMismatchException exception){
-            System.err.print("You have entered an invalid input\n");
+            System.err.println("You have entered an invalid input\n");
             System.out.println();
             System.out.print("Please enter Y or N: ");
             choice = input.next();

@@ -12,7 +12,6 @@ public class Car {
         this.year = year;
         this.vehicleNumber = vehicleNumber;
         this.issue = issue;
-
     }
 
     public String getBrand() {
