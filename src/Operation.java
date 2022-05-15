@@ -8,6 +8,33 @@ public class Operation {
     static ArrayList<Car> cars = new ArrayList<>();
     static Database db = Database.getInstance();
 
+    //TODO: Print unique brands
+    //TODO: to enable sending the email.
+    //TODO: implementing the 'Template' design pattern
+
+
+    public static void closingDialog(){
+        System.out.println("\n*** Thank you for using our system, See you! ***");
+        System.exit(0);
+    }
+    public static void aboutUs(){
+        System.out.println(
+                """ 
+                \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information Technology. Developing a Car Complaints system.
+                - [Our vision]: Aiming to reduce the number of accidents caused by malfunctioning cars from the factory.
+                   """);
+    }
+    public static void showDialog(){
+        // Printing to user Services Menu
+        System.out.println("\n==========================================");
+        System.out.println("              Services Menu");
+        System.out.println("==========================================");
+        System.out.println("1. Cars companies complaints by brand");
+        System.out.println("2. Check all complaints");
+        System.out.println("3. About us");
+        System.out.println("4. Exit");
+        System.out.print("Please enter your choice: ");
+    }
     public static int introMessage() {
         // Variables declaration
         int userInput = 0;
@@ -48,47 +75,32 @@ public class Operation {
 
         return userInput;
     }
-
+    public static void complaintsBrands(){
+            System.out.println();
+            printUniqueBrands();
+            System.out.println();
+            System.out.print("\nEnter a brand name to search for: ");
+            String brandName = input.next();//
+            getComplaintsByBrands(brandName);
+    }
     public static void steps() {
         int userInput;
 
         while (true) {
             try {
-                // Printing to user Services Menu
-                System.out.println("\n==========================================");
-                System.out.println("              Services Menu");
-                System.out.println("==========================================");
-                System.out.println("1. Cars companies complaints by brand");
-                System.out.println("2. Check all complaints"); // TODO: implementing the 'Observer' design pattern to enable sending the email.
-                System.out.println("3. About us");
-                System.out.println("4. Exit");
-                System.out.print("Please enter your choice: ");
-
+               showDialog();
                 // Read user input and check either to use the system or exit
                 userInput = input.nextInt();
-
                 if (userInput == 1) {
-                    System.out.println();
-                    printUniqueBrands();
-                    System.out.println();
-                    System.out.print("\nEnter a brand name to search for: ");
-                    String brandName = input.next();// TODO: error handling.
-                    getComplaintsByBrands(brandName);
+                    complaintsBrands();
                 } else if (userInput == 2) {
                     getAllComplaints();
                 } else if (userInput == 3) // This choice will invoke the 'About Us' choice
                 {
-                    System.out.println(
-                             """ 
-                             \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information Technology. Developing a Car Complaints system.
-                             - [Our vision]: Aiming to reduce the number of accidents caused by malfunctioning cars from the factory.
-                                """);
-
-
+                    aboutUs();
                 } else if (userInput == 4) // Exit the program
                 {
-                    System.out.println("\n*** Thank you for using our system, See you! ***");
-                    System.exit(0);
+                    closingDialog();
                 } else if (userInput < 0 || userInput > 4)// any valid choice other than the defined ones
                 {
                     System.out.println("\nPlease check the menu again, then enter your choice");
@@ -101,7 +113,6 @@ public class Operation {
             }
         }
     }
-
     public static void getComplaintsByBrands(String brand) {
         String choice;
         System.out.println();
@@ -139,13 +150,11 @@ public class Operation {
         }
         }
     }
-
     public static void getAllComplaints() {
         for (Car c : cars) {
             System.out.println(c);
         }
     }
-
     public static void retrieveCars() throws FileNotFoundException {
         //
         Scanner in = new Scanner(new File(db.getFileName()));
@@ -163,7 +172,6 @@ public class Operation {
                 st = new StringTokenizer(in.nextLine(), ",");
         }
     }
-
     public static void printUniqueBrands() {
         int iterator = 1;
         int carsLen = cars.size();
@@ -189,8 +197,6 @@ public class Operation {
             System.out.println(iterator++ + ". " + unique[i] + " ");
         }
     }
-
-
     public static void simulateNetworkLatency() {
         try {
             System.out.println();
