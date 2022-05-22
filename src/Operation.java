@@ -7,24 +7,26 @@ public class Operation {
 
     static ArrayList<Car> cars = new ArrayList<>();
     static Database db = Database.getInstance();
+    static HashSet <String>  uniqueCarsList;
 
-    //TODO: Print unique brands
     //TODO: to enable sending the email.
     //TODO: implementing the 'Template' design pattern
 
 
-    public static void closingDialog(){
+    public static void closingDialog() {
         System.out.println("\n*** Thank you for using our system, See you! ***");
         System.exit(0);
     }
-    public static void aboutUs(){
+
+    public static void aboutUs() {
         System.out.println(
                 """ 
-                \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information Technology. Developing a Car Complaints system.
-                - [Our vision]: Aiming to reduce the number of accidents caused by malfunctioning cars from the factory.
-                   """);
+                        \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information Technology. Developing a Car Complaints system.
+                        - [Our vision]: Aiming to reduce the number of accidents caused by malfunctioning cars from the factory.
+                           """);
     }
-    public static void showDialog(){
+
+    public static void showDialog() {
         // Printing to user Services Menu
         System.out.println("\n==========================================");
         System.out.println("              Services Menu");
@@ -35,6 +37,7 @@ public class Operation {
         System.out.println("4. Exit");
         System.out.print("Please enter your choice: ");
     }
+
     public static int introMessage() {
         // Variables declaration
         int userInput = 0;
@@ -75,20 +78,23 @@ public class Operation {
 
         return userInput;
     }
-    public static void complaintsBrands(){
-            System.out.println();
-            printUniqueBrands();
-            System.out.println();
-            System.out.print("\nEnter a brand name to search for: ");
-            String brandName = input.next();//
-            getComplaintsByBrands(brandName);
+
+    public static void complaintsBrands() {
+        System.out.println();
+        printUniqueCars();
+        System.out.println();
+        System.out.print("\nEnter a brand name to search for: ");
+        String brandName = input.next();//
+        simulateNetworkLatency();
+        getComplaintsByBrands(brandName);
     }
+
     public static void steps() {
         int userInput;
 
         while (true) {
             try {
-               showDialog();
+                showDialog();
                 // Read user input and check either to use the system or exit
                 userInput = input.nextInt();
                 if (userInput == 1) {
@@ -113,55 +119,56 @@ public class Operation {
             }
         }
     }
+
     public static void getComplaintsByBrands(String brand) {
         String choice;
         System.out.println();
         boolean flag = false;
-        simulateNetworkLatency();
-        for (int i = 0; i < cars.size(); i++)
-        {
-            if (cars.get(i).getBrand().equalsIgnoreCase(brand))
-            {
+
+        for (int i = 0; i < cars.size(); i++) {
+            if (cars.get(i).getBrand().equalsIgnoreCase(brand)) {
                 System.out.println(cars.get(i));
             }
         }
-        System.out.print("\n Search for another brand? Y/N: ");
+
+        System.out.print("\nSearch for another brand? Y/N: ");
         choice = input.next();
-        while(!flag)
-        {
-        try {
-            if (choice.equalsIgnoreCase("N") || choice.equalsIgnoreCase("NO")) {
-                steps();
-                flag = true;
-            } else if (choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("YES")) {
-                printUniqueBrands();
-                System.out.print("\nEnter another brand to search for: ");
-                String choiceOfBrand = input.next();
-                getComplaintsByBrands(choiceOfBrand);
-            } else {
-                throw new InputMismatchException();
+        while (!flag) {
+            try {
+                if (choice.equalsIgnoreCase("N") || choice.equalsIgnoreCase("NO")) {
+                    steps();
+                    flag = true;
+                } else if (choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("YES")) {
+                    printUniqueCars();
+                    System.out.print("\nEnter another brand to search for: ");
+                    String choiceOfBrand = input.next();
+                    getComplaintsByBrands(choiceOfBrand);
+                } else {
+                    throw new InputMismatchException();
+                }
+            } catch (InputMismatchException exception) {
+                System.err.println("You have entered an invalid input\n");
+                System.out.println();
+                System.out.print("Please enter Y or N: ");
+                choice = input.next();
             }
         }
-        catch (InputMismatchException exception){
-            System.err.println("You have entered an invalid input\n");
-            System.out.println();
-            System.out.print("Please enter Y or N: ");
-            choice = input.next();
-        }
-        }
     }
+
     public static void getAllComplaints() {
         for (Car c : cars) {
             System.out.println(c);
         }
     }
+
     public static void retrieveCars() throws FileNotFoundException {
-        //
         Scanner in = new Scanner(new File(db.getFileName()));
         StringTokenizer st = new StringTokenizer(in.nextLine(), ",");
         int count = 1;
 
-        while (st.hasMoreTokens()) {
+        // retrieving from the database to add ..
+        while (st.hasMoreTokens())
+        {
             String brand = st.nextToken();
             String model = st.nextToken();
             int year = Integer.parseInt(st.nextToken());
@@ -171,30 +178,19 @@ public class Operation {
             if (in.hasNext())
                 st = new StringTokenizer(in.nextLine(), ",");
         }
+
+
+        uniqueCarsList = new HashSet();   // Adding elements to a unique set for printing purposes ..
+        for (int i = 0; i < cars.size(); i++)
+        {
+            uniqueCarsList.add(cars.get(i).getBrand());
+        }
     }
-    public static void printUniqueBrands() {
-        int iterator = 1;
-        int carsLen = cars.size();
-        String duplicated[] = new String[carsLen];
-        String unique[] = new String[carsLen];
-        int index = 0;
 
-        for (int i = 0; i < carsLen; i++) {
-            duplicated[i] = cars.get(i).getBrand();
-        }
-
-        Arrays.sort(duplicated);
-
-        for (int i = 0; i < duplicated.length; i++) {
-            while (i < carsLen - 1 && duplicated[i] == duplicated[i + 1]) {
-                i++;
-            }
-            unique[index] = duplicated[i];
-            index++;
-        }
-
-        for (int i = 0; i < index; i++) {
-            System.out.println(iterator++ + ". " + unique[i] + " ");
+    public static void printUniqueCars() {
+         Iterator<String> i = uniqueCarsList.iterator();
+        while (i.hasNext()) {
+            System.out.println(i.next());
         }
     }
     public static void simulateNetworkLatency() {
@@ -203,7 +199,7 @@ public class Operation {
             for (int i = 0; i <= 10; i++) {
                 System.out.print(".");
                 Thread.sleep(250);
-                if (i == 5){
+                if (i == 5) {
                     System.out.print(" Fetching ");
                 }
             }

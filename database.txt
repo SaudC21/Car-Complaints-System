@@ -31,10 +31,10 @@ Hyundai,Azera,2019,346842,There are Gear Box Problems/Transmission Failures
 Hyundai,Accent,2018,346842,The Transmission Fluid is Leaking
 Hyundai,Saria,2021,346842,The Automatic Transmission is Slipping
 Hyundai,Kona,2014,346842,The Transmission Filters are Clogged
-Kia, Niro, 2020,135749,There’s Water in the Transmission System
-Kia, Rio, 2020,135749,Electrical Problems: Speakers
-Kia, K5, 2020,135749,Electrical Problems: Lights
-Kia, Stinger,2020,135749,Electrical Problems: Flat Battery
+Kia,Niro,2020,135749,There’s Water in the Transmission System
+Kia,Rio,2020,135749,Electrical Problems: Speakers
+Kia,K5,2020,135749,Electrical Problems: Lights
+Kia,Stinger,2020,135749,Electrical Problems: Flat Battery
 Rolls Royce,Phantom,2022,564134,Window Problems
 Rolls Royce,Ghost,2022,564134,Faulty Starter
 Rolls Royce,Cullinan,2022,564134,Fuel Economy is Falling
