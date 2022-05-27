@@ -1,12 +1,23 @@
-import java.io.FileNotFoundException;
+import Observers.EmailObserverClient;
+import Observers.MainObserver;
+import Observers.smsObserver;
+import Subjects.MessageSubject;
+import Subjects.Subject;
 
 public class App {
-
-    public static void main(String[] args) throws FileNotFoundException {
-
+    public static void main(String[] args) {
         Operation operation = new Operation();
-        operation.introMessage(); // This method to welcome the user and check either he/she wants to use the system or not
-        operation.steps(); // This method will show the user our services
+        operation.introMessage();
+        operation.steps();
 
+        MainObserver emailClient = new EmailObserverClient("Abdullah.m.bajaman@gmail.com");
+        MainObserver smsClient = new smsObserver("+966000000000");
+        Subject s = new MessageSubject();
+
+        s.subscribe(smsClient);
+        s.subscribe(emailClient);
     }
+
+
+
 }

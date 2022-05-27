@@ -2,20 +2,33 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Operation {
-    static Scanner input = new Scanner(System.in);
+//TODO: to enable sending the email.
+//TODO: implementing the 'Template' design pattern
 
+public class Operation {
+
+    static Scanner input = new Scanner(System.in);
     static ArrayList<Car> cars = new ArrayList<>();
     static Database db = Database.getInstance();
-    static HashSet <String>  uniqueCarsList;
+    static HashSet<String> uniqueCarsList;
 
-    //TODO: to enable sending the email.
-    //TODO: implementing the 'Template' design pattern
+//        Scanner scan = new Scanner(System.in);
+//        Operation operation = new Operation();
+//        operation.introMessage(); // This method to welcome the user and check either he/she wants to use the system or not
+//        operation.steps(); // This method will show the user our services
 
 
-    public static void closingDialog() {
-        System.out.println("\n*** Thank you for using our system, See you! ***");
-        System.exit(0);
+    public static void showWelcomeMessage() {
+        // Printing introduction to user
+        System.out.println("==========================================");
+        System.out.println("            Car Complaints System");
+        System.out.println("==========================================");
+        System.out.println("Brief description \n");
+        System.out.println("[ Through enforcing vehicle performance standards \n" +
+                " and partnerships with state and local governments, \n" +
+                " NHTSA reduces deaths, injuries and economic losses from motor vehicle crashes. ]\n");
+
+        System.out.print("To start using our services please enter '1'. Otherwise enter '0' to exit: ");
     }
 
     public static void aboutUs() {
@@ -38,27 +51,13 @@ public class Operation {
         System.out.print("Please enter your choice: ");
     }
 
-    public static void showWelcomeMessage() {
-        // Printing introduction to user
-        System.out.println("==========================================");
-        System.out.println("            Car Complaints System");
-        System.out.println("==========================================");
-        System.out.println("Brief description \n");
-        System.out.println("[ Through enforcing vehicle performance standards \n" +
-                " and partnerships with state and local governments, \n" +
-                " NHTSA reduces deaths, injuries and economic losses from motor vehicle crashes. ]\n");
-
-        System.out.print("To start using our services please enter '1'. Otherwise enter '0' to exit: ");
-    }
-
     public static void introMessage() {
         // Variables declaration
         int userInput = 0;
 
         showWelcomeMessage();
 
-        while (true)
-        {
+        while (true) {
             try {
                 // Read user input and check either to use the system or exit
                 Scanner in = new Scanner(System.in);
@@ -93,50 +92,60 @@ public class Operation {
     public static void steps() {
         int userInput;
 
-            try {
-                showMenu();
-                // Read user input and check either to use the system or exit
-                userInput = input.nextInt();
-                if (userInput == 1) {
-                    complaintsBrands();
-                } else if (userInput == 2) {
-                    getAllComplaints();
-                } else if (userInput == 3) // This choice will invoke the 'About Us' choice
-                {
-                    aboutUs();
-                } else if (userInput == 4) // Exit the program
-                {
-                    closingDialog();
-                } else if (userInput < 0 || userInput > 4)// any valid choice other than the defined ones
-                {
-                    System.out.println("\nPlease check the menu again, then enter your choice");
-
-                }
-
-            } catch (InputMismatchException exception) {
-                System.err.println("** Please enter a valid number **\n");
+        try {
+            showMenu();
+            // Read user input and check either to use the system or exit
+            userInput = input.nextInt();
+            if (userInput == 1) {
+                complaintsBrands();
+            } else if (userInput == 2) {
+                getAllComplaints();
+            } else if (userInput == 3) // This choice will invoke the 'About Us' choice
+            {
+                aboutUs();
+            } else if (userInput == 4) // Exit the program
+            {
+                closingDialog();
+            } else if (userInput == 5) {
+                //TODO: add Observer implementation.
+            } else if (userInput < 0 || userInput > 4)// any valid choice other than the defined ones
+            {
+                System.out.println("\nPlease check the menu again, then enter your choice");
 
             }
+
+        } catch (InputMismatchException exception) {
+            System.err.println("** Please enter a valid number **\n");
+
+        }
 
     }
 
     public static void getComplaintsByBrands(String brand) {
-        String choice;
         System.out.println();
         boolean flag = false;
-        boolean returnalOutput;
 
+        // TODO: handle wrong brand entry
         // Print selected brand
-        for (int i = 0; i < cars.size(); i++) { // TODO: handle wrong brand entry
+        for (int i = 0; i < cars.size(); i++) {
             if (cars.get(i).getBrand().equalsIgnoreCase(brand)) {
                 System.out.println(cars.get(i));
             } else {
-                System.out.println("Wrong entry");
+                System.out.println("\"" + brand + "\"" + " could not be found within our database.");
+                break;
             }
+
+//            else{
+//                System.out.println("[!] Wrong entry, please try again.");
+//                break;
+//            }
         }
+//        System.out.println("\n Enter another brand: " );
+//        String choiceBrand = input.next();
+//        getComplaintsByBrands(choiceBrand);
 
         System.out.print("\nSearch for another brand? Y/N: ");
-        choice = input.next();
+        String choice = input.next();
         while (!flag) {
             try {
                 if (choice.equalsIgnoreCase("N") || choice.equalsIgnoreCase("NO")) {
@@ -144,7 +153,7 @@ public class Operation {
                     flag = true;
                 } else if (choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("YES")) {
                     printUniqueCars();
-                    System.out.print("\nEnter another brand to search for: ");
+                    System.out.print("\nEnter brand to search for: ");
                     String choiceOfBrand = input.next();
                     getComplaintsByBrands(choiceOfBrand);
                 } else {
@@ -152,7 +161,7 @@ public class Operation {
                 }
             } catch (InputMismatchException exception) {
                 System.err.println("[!] You have entered an invalid input\n");
-                System.out.println("Please enter Y or N: ");
+                System.out.print("Please enter Y or N: ");
                 choice = input.next();
             }
         }
@@ -165,11 +174,10 @@ public class Operation {
         }
     }
 
-    public static void initCars()
-    {
+    public static void initCars() {
         Scanner in = null;
         try {
-             in = new Scanner(new File(db.getFileName()));
+            in = new Scanner(new File(db.getFileName()));
         } catch (FileNotFoundException e) {
             System.err.println("Database file is not found.");
             System.exit(0);
@@ -179,8 +187,7 @@ public class Operation {
         int count = 1;
 
         // retrieving from the database to add ..
-        while (st.hasMoreTokens())
-        {
+        while (st.hasMoreTokens()) {
             String brand = st.nextToken();
             String model = st.nextToken();
             int year = Integer.parseInt(st.nextToken());
@@ -192,19 +199,19 @@ public class Operation {
         }
 
         uniqueCarsList = new HashSet();   // Adding elements to a unique set for printing purposes ..
-        for (int i = 0; i < cars.size(); i++)
-        {
+        for (int i = 0; i < cars.size(); i++) {
             uniqueCarsList.add(cars.get(i).getBrand());
         }
     }
 
     public static void printUniqueCars() {
-         Iterator<String> i = uniqueCarsList.iterator();
-         int iterator = 1;
+        Iterator<String> i = uniqueCarsList.iterator();
+        int iterator = 1;
         while (i.hasNext()) {
             System.out.println(iterator++ + ". " + i.next());
         }
     }
+
     public static void simulateNetworkLatency() {
         try {
             System.out.println();
@@ -215,9 +222,15 @@ public class Operation {
                     System.out.print(" Fetching ");
                 }
             }
-            System.out.println("\n");
+            System.out.print("\n");
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
     }
+
+    public static void closingDialog() {
+        System.out.println("\n*** Thank you for using our system, See you! ***");
+        System.exit(0);
+    }
 }
+
