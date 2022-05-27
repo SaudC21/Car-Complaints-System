@@ -9,8 +9,9 @@ public class EmailObserverClient extends MainObserver {
 
     }
     @Override
-    public void update(String message){
-        SendEmail.send("A new episode is out! ",  message, getRecipient());
-        System.out.println("\n >> Email Client :: " + super.getRecipient() + " " + message);
-     }
+    public synchronized void update(String message){
+        SendEmail.send(" Complaints you requested",  message, getRecipient());
+        System.out.println("........... Email has been sent to (" + super.getRecipient() + ") ...........");
+        System.out.println("\n >> Message content :: " + "\n" + message);
+    }
 }

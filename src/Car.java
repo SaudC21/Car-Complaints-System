@@ -58,9 +58,7 @@ public class Car {
     @Override
     public String toString() {
         String lineSeparator = "+--------------+---------+-------+-------------+--------------------------------------------------------------------";
-        System.out.println(lineSeparator);
-
-        String s = brand +
+        String s = lineSeparator + "\n" + brand +
                 " | Model: " + model +
                 " | Year: " + year +
                 " | VehicleNumber: " + vehicleNumber +
