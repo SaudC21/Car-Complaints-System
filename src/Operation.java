@@ -26,7 +26,7 @@ public class Operation {
                            """);
     }
 
-    public static void showDialog() {
+    public static void showMenu() {
         // Printing to user Services Menu
         System.out.println("\n==========================================");
         System.out.println("              Services Menu");
@@ -38,10 +38,7 @@ public class Operation {
         System.out.print("Please enter your choice: ");
     }
 
-    public static int introMessage() {
-        // Variables declaration
-        int userInput = 0;
-
+    public static void showWelcomeMessage() {
         // Printing introduction to user
         System.out.println("==========================================");
         System.out.println("            Car Complaints System");
@@ -52,6 +49,13 @@ public class Operation {
                 " NHTSA reduces deaths, injuries and economic losses from motor vehicle crashes. ]\n");
 
         System.out.print("To start using our services please enter '1'. Otherwise enter '0' to exit: ");
+    }
+
+    public static void introMessage() {
+        // Variables declaration
+        int userInput = 0;
+
+        showWelcomeMessage();
 
         while (true)
         {
@@ -60,7 +64,7 @@ public class Operation {
                 Scanner in = new Scanner(System.in);
                 userInput = in.nextInt();
                 if (userInput == 1) { // Use the system
-                    retrieveCars();
+                    initCars();
                     break;
                 } else if (userInput == 0) { // Exit the system
                     System.out.println("\n*** Thank you for using our system, See you! ***");
@@ -72,35 +76,25 @@ public class Operation {
             } catch (InputMismatchException e) { // Catch if user entered characters
                 System.err.print("[!] ERROR: Please enter 1 or 0: ");
                 continue;
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             }
         }
-
-        return userInput;
     }
 
     public static void complaintsBrands() {
         System.out.println();
         printUniqueCars();
-        System.out.println();
         System.out.print("\nEnter a brand name to search for: ");
         input.nextLine();
         String brandName = input.nextLine(); //
         simulateNetworkLatency();
-//        if ()
-//        {
-//
-//        }
         getComplaintsByBrands(brandName);
     }
 
     public static void steps() {
         int userInput;
 
-
             try {
-                showDialog();
+                showMenu();
                 // Read user input and check either to use the system or exit
                 userInput = input.nextInt();
                 if (userInput == 1) {
@@ -132,9 +126,12 @@ public class Operation {
         boolean flag = false;
         boolean returnalOutput;
 
-        for (int i = 0; i < cars.size(); i++) {
+        // Print selected brand
+        for (int i = 0; i < cars.size(); i++) { // TODO: handle wrong brand entry
             if (cars.get(i).getBrand().equalsIgnoreCase(brand)) {
                 System.out.println(cars.get(i));
+            } else {
+                System.out.println("Wrong entry");
             }
         }
 
@@ -154,9 +151,8 @@ public class Operation {
                     throw new InputMismatchException();
                 }
             } catch (InputMismatchException exception) {
-                System.err.println("You have entered an invalid input\n");
-                System.out.println();
-                System.out.print("Please enter Y or N: ");
+                System.err.println("[!] You have entered an invalid input\n");
+                System.out.println("Please enter Y or N: ");
                 choice = input.next();
             }
         }
@@ -169,8 +165,16 @@ public class Operation {
         }
     }
 
-    public static void retrieveCars() throws FileNotFoundException {
-        Scanner in = new Scanner(new File(db.getFileName()));
+    public static void initCars()
+    {
+        Scanner in = null;
+        try {
+             in = new Scanner(new File(db.getFileName()));
+        } catch (FileNotFoundException e) {
+            System.err.println("Database file is not found.");
+            System.exit(0);
+        }
+
         StringTokenizer st = new StringTokenizer(in.nextLine(), ",");
         int count = 1;
 
@@ -186,7 +190,6 @@ public class Operation {
             if (in.hasNext())
                 st = new StringTokenizer(in.nextLine(), ",");
         }
-
 
         uniqueCarsList = new HashSet();   // Adding elements to a unique set for printing purposes ..
         for (int i = 0; i < cars.size(); i++)
