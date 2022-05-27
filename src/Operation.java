@@ -46,14 +46,15 @@ public class Operation {
         System.out.println("==========================================");
         System.out.println("            Car Complaints System");
         System.out.println("==========================================");
-        System.out.println("brief description \n");
+        System.out.println("Brief description \n");
         System.out.println("[ Through enforcing vehicle performance standards \n" +
                 " and partnerships with state and local governments, \n" +
                 " NHTSA reduces deaths, injuries and economic losses from motor vehicle crashes. ]\n");
 
         System.out.print("To start using our services please enter '1'. Otherwise enter '0' to exit: ");
 
-        while (true) {
+        while (true)
+        {
             try {
                 // Read user input and check either to use the system or exit
                 Scanner in = new Scanner(System.in);
@@ -69,7 +70,7 @@ public class Operation {
                     continue;
                 }
             } catch (InputMismatchException e) { // Catch if user entered characters
-                System.err.print("ERROR: Please enter 1 or 0: ");
+                System.err.print("[!] ERROR: Please enter 1 or 0: ");
                 continue;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -84,15 +85,20 @@ public class Operation {
         printUniqueCars();
         System.out.println();
         System.out.print("\nEnter a brand name to search for: ");
-        String brandName = input.next();//
+        input.nextLine();
+        String brandName = input.nextLine(); //
         simulateNetworkLatency();
+//        if ()
+//        {
+//
+//        }
         getComplaintsByBrands(brandName);
     }
 
     public static void steps() {
         int userInput;
 
-        while (true) {
+
             try {
                 showDialog();
                 // Read user input and check either to use the system or exit
@@ -110,20 +116,21 @@ public class Operation {
                 } else if (userInput < 0 || userInput > 4)// any valid choice other than the defined ones
                 {
                     System.out.println("\nPlease check the menu again, then enter your choice");
-                    continue;
+
                 }
 
             } catch (InputMismatchException exception) {
                 System.err.println("** Please enter a valid number **\n");
-                continue;
+
             }
-        }
+
     }
 
     public static void getComplaintsByBrands(String brand) {
         String choice;
         System.out.println();
         boolean flag = false;
+        boolean returnalOutput;
 
         for (int i = 0; i < cars.size(); i++) {
             if (cars.get(i).getBrand().equalsIgnoreCase(brand)) {
@@ -156,6 +163,7 @@ public class Operation {
     }
 
     public static void getAllComplaints() {
+        simulateNetworkLatency();
         for (Car c : cars) {
             System.out.println(c);
         }
@@ -189,8 +197,9 @@ public class Operation {
 
     public static void printUniqueCars() {
          Iterator<String> i = uniqueCarsList.iterator();
+         int iterator = 1;
         while (i.hasNext()) {
-            System.out.println(i.next());
+            System.out.println(iterator++ + ". " + i.next());
         }
     }
     public static void simulateNetworkLatency() {
