@@ -1,7 +1,8 @@
 package Subjects;
 
-import java.util.ArrayList;
 import Observers.MainObserver;
+
+import java.util.ArrayList;
 
 public class MessageSubject implements Subject {
     ArrayList<MainObserver> subscribed = new ArrayList<>();
@@ -42,7 +43,6 @@ public class MessageSubject implements Subject {
             o.update(m);
         }
     }
-
     @Override
     public void notifyUpdateUnsubscribed(String m) {
         for (MainObserver o: unsubscribed)

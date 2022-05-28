@@ -8,7 +8,6 @@ public class Database {
         if (db == null) {
             db = new Database();
         }
-
         // return instance that has been made or created
         return db;
     }

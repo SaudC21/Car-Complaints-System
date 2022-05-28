@@ -11,7 +11,8 @@ public class Operation {
     static Database db = Database.getInstance();
     static HashSet<String> uniqueCarsList;
 
-    public static void introMessage() {
+    public static void introMessage()
+    {
         // Variables declaration
         int userInput = 0;
 
@@ -39,12 +40,13 @@ public class Operation {
         }
     }
 
-    public static void showWelcomeMessage() {
+    public static void showWelcomeMessage()
+    {
         // Printing introduction to user
         System.out.println("==========================================");
         System.out.println("            Car Complaints System");
         System.out.println("==========================================");
-        System.out.println("Brief description \n");
+        System.out.println("\t\t > Brief description < \n");
         System.out.println("[ Through enforcing vehicle performance standards \n" +
                 " and partnerships with state and local governments, \n" +
                 " NHTSA reduces deaths, injuries and economic losses from motor vehicle crashes. ]\n");
@@ -52,8 +54,12 @@ public class Operation {
         System.out.print("To start using our services please enter '1'. Otherwise enter '0' to exit: ");
     }
 
-    public static void aboutUs() {
+    public static void aboutUs()
+    {
+        System.out.println("\t\t > About Us < ");
+
         System.out.print(
+
                 """ 
                         \n- [Who are we?]: We are two students from King Abdulaziz University, Faculty of Computing and Information Technology. Developing a Car Complaints system.
                         - [Our vision]: Aiming to reduce the number of accidents caused by malfunctioning cars from the factory.
@@ -61,7 +67,8 @@ public class Operation {
         steps();
     }
 
-    public static void showMenu() {
+    public static void showMenu()
+    {
         // Printing to user Services Menu
         System.out.println("\n==========================================");
         System.out.println("              Services Menu");
@@ -74,7 +81,8 @@ public class Operation {
         System.out.print("Please enter your choice: ");
     }
 
-    public static void complaintsBrands() {
+    public static void complaintsBrands()
+    {
         printUniqueCars();
         System.out.print("\nEnter a brand name to search for: ");
         String brandName = input.next();
@@ -82,15 +90,15 @@ public class Operation {
         getComplaintsByBrands(brandName);
     }
 
-    public static void steps() {
+    public static void steps()
+    {
         int userInput;
 
         try {
             showMenu();
             // Read user input and check either to use the system or exit
             userInput = input.nextInt();
-            if (userInput == 1)
-            {
+            if (userInput == 1) {
                 complaintsBrands();
             } else if (userInput == 2)
             {
@@ -98,18 +106,19 @@ public class Operation {
             } else if (userInput == 3) // This choice will invoke the 'About Us' choice
             {
                 sendingEmail();
-            } else if (userInput == 4)
+            } else if (userInput == 4) // Show aboutUs dialog where we describe our project
             {
                 aboutUs();
             } else if (userInput == 5) // Exit the program
             {
                 closingDialog();
-            } else if (userInput < 0 || userInput > 4)// any valid choice other than the defined ones
+            } else if (userInput < 0 || userInput > 4) // any valid choice other than the defined ones
             {
                 System.out.println("\nPlease check the menu again, then enter your choice");
             }
 
-        } catch (InputMismatchException exception) {
+        } catch (InputMismatchException exception) // any other invalid choice will be caught
+        {
             System.err.println("** Please enter a valid number **\n");
 
         }
@@ -118,33 +127,42 @@ public class Operation {
 
     public static void sendingEmail()
     {
-        System.out.print("Enter the brand you'd like to receive compliant about: ");
+        System.out.print("Enter the brand you'd like to receive compliant about: ");  // asking the user to enter the brand
         String brand = input.next();
         System.out.print("Enter your email: ");
         String email = input.next();
 
+
+        // creating the EmailClient ..
         MainObserver emailClient = new EmailObserverClient(email);
         Subject s = new MessageSubject();
 
-        s.add(emailClient);
+        s.add(emailClient); // adding client to the arrayList to be able to be sent
 
         simulateEmailLatency();
 
         String message = getComplaintsByBrandsEmail(brand);
-        if (message.equals("")){
+        if (message.equals(""))
+        {
+            // message if the entered brand is not present within the system
             System.out.println("\"" + brand + "\"" + " could not be found within our database.");
-        } else {
+        } else
+        {
+            // send a structured email to the client with the intended info about the brand
             s.notifyUpdateUnsubscribed(message);
             emailSubscription(s, emailClient);
         }
     }
 
-    public static void emailSubscription(Subject s, MainObserver emailClient) {
+    public static void emailSubscription(Subject s, MainObserver emailClient)
+    {
+        // Asking the client if he/she want to be subscribed or not.
         System.out.print("Would you like to subscribe to our newsletter with the previous email? Yes/No: ");
         String choice = input.next();
         while (true) {
             try {
                 if (choice.equalsIgnoreCase("Y") || choice.equalsIgnoreCase("YES")) {
+                    // add to the subscribed list
                     s.subscribe(emailClient);
                     closingDialog();
                 } else if (choice.equalsIgnoreCase("N") || choice.equalsIgnoreCase("NO")) {
@@ -153,16 +171,18 @@ public class Operation {
                     throw new InputMismatchException();
                 }
             } catch (InputMismatchException e) {
-                System.err.print("[!] You have entered an invalid input");
+
+                System.err.print("[!] You have entered an invalid input"); // any other invalid input will be caught
                 System.out.print("\n\nPlease enter Y or N: ");
                 choice = input.next();
             }
         }
     }
 
-    public static String getComplaintsByBrandsEmail(String brand) {
+    public static String getComplaintsByBrandsEmail(String brand)
+    {
         System.out.println();
-        StringBuffer brandComplaints = new StringBuffer();
+        StringBuffer brandComplaints = new StringBuffer(); // we have implemented a StringBuffered to be able to write long texts into email.
         String chosenBrand = brand;
 
         // Print selected brand
@@ -176,7 +196,10 @@ public class Operation {
         return brands;
     }
 
-    public static void printSelectedBrand(String brand){
+    public static void printSelectedBrand(String brand)
+    {
+        // this method will handle the printing of the selected brand previously
+
         boolean flag2 = false;
         // Print selected brand
         for (int i = 0; i < cars.size(); i++) {
@@ -219,7 +242,9 @@ public class Operation {
         }
     }
 
-    public static void getAllComplaints() {
+    public static void getAllComplaints()
+    {
+        // this method will print all complaints present within our database
         simulateNetworkLatency();
         for (Car c : cars) {
             System.out.println(c);
@@ -227,7 +252,9 @@ public class Operation {
         closingDialog();
     }
 
-    public static void initCars() {
+    public static void initCars()
+    {
+        // initialize the cars and store it in a data structure.
         Scanner in = null;
         try {
             in = new Scanner(new File(db.getFileName()));
@@ -257,7 +284,8 @@ public class Operation {
         }
     }
 
-    public static void printUniqueCars() {
+    public static void printUniqueCars()
+    {
         System.out.println();
         Iterator<String> i = uniqueCarsList.iterator();
         int iterator = 1;
@@ -266,7 +294,9 @@ public class Operation {
         }
     }
 
-    public static void simulateEmailLatency() {
+    public static void simulateEmailLatency()
+    {
+        // simulate latency when sending an email ..
         try {
             System.out.println();
             for (int i = 0; i <= 20; i++) {
@@ -282,7 +312,9 @@ public class Operation {
         }
     }
 
-    public static void simulateNetworkLatency() {
+    public static void simulateNetworkLatency()
+    {
+        // simulate latency whenever fetching from the database ..
         try {
             System.out.println();
             for (int i = 0; i <= 10; i++) {
@@ -298,7 +330,9 @@ public class Operation {
         }
     }
 
-    public static void closingDialog() {
+    public static void closingDialog()
+    {
+        // Closing dialog indicating a service have been provided and done ..
         System.out.println("\n*** Thank you for using our system, See you! ***");
         System.exit(0);
     }
