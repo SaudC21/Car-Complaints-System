@@ -3,7 +3,6 @@ public class Database {
     private static Database db;
     private final String fileName = "database.txt"; // Initializing file name
 
-
     private Database() {
     }
 
@@ -19,7 +18,6 @@ public class Database {
     public String getFileName() {
         return fileName;
     }
-
 
     @Override
     public String toString() {

@@ -57,7 +57,6 @@ public class Operation {
     public static void aboutUs()
     {
         System.out.println("\t\t > About Us < ");
-
         System.out.print(
 
                 """ 
@@ -132,7 +131,6 @@ public class Operation {
         System.out.print("Enter your email: ");
         String email = input.next();
 
-
         // creating the EmailClient ..
         MainObserver emailClient = new EmailObserverClient(email);
         Subject s = new MessageSubject();
@@ -171,7 +169,6 @@ public class Operation {
                     throw new InputMismatchException();
                 }
             } catch (InputMismatchException e) {
-
                 System.err.print("[!] You have entered an invalid input"); // any other invalid input will be caught
                 System.out.print("\n\nPlease enter Y or N: ");
                 choice = input.next();
